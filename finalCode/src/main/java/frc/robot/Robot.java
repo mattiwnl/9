@@ -20,6 +20,8 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 public class Robot extends TimedRobot {
 //Global Variables
+    // Defines the Auto Command
+    private Command m_autonomousCommand;
     // Initiate Robot Container
     private RobotContainer m_robotContainer;
     
