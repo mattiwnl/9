@@ -25,7 +25,13 @@ public class RobotContainer {
 
 	public final static TurretSubsystem turretSub = new TurretSubsystem();
 	public final static DriveSubsystem driveSub = new DriveSubsystem();
-
+	
+	private final static Command autoWall = new autoWall();
+	private final static Command autoMiddle = new autoMiddle();
+	private final static Command autoFieldCenter = new autoFieldCenter();	
+  	// A chooser for autonomous commands
+  	SendableChooser<Command> m_chooser = new SendableChooser<>();
+	
   	public RobotContainer() {
 		// Initialize Command Buttons
 		configXboxButtonBindings();
@@ -46,6 +52,12 @@ public class RobotContainer {
 				() -> Robot.steeringAdjust
 			)
 		);
+		
+		m_chooser.setDefaultOption("Wall Auto", autoWall);
+    		m_chooser.addOption("In front of goal Auto", autoMiddle);
+		m_chooser.addOption("Field Center Auto", autoFieldCenter);
+    		// Put the chooser on the dashboard
+    		SmartDashboard.getTab("Autonomous").add(m_chooser);
 	}
   	private void configXboxButtonBindings() {
 		new JoystickButton(xbox, 5).toggleWhenPressed(new intakeAndStore()); // Left Bumper
@@ -54,4 +66,8 @@ public class RobotContainer {
 		new JoystickButton(xbox, 7).whileHeld(new ElevatorCommandUp(elevatorSub)); // Start
 		new JoystickButton(xbox, 8).whileHeld(new ElevatorCommandDown(elevatorSub)); // Select
 	}
+	public Command getAutonomousCommand() {
+    		// An ExampleCommand will run in autonomous
+    		return m_chooser.getSelected();
+  	}
 }
