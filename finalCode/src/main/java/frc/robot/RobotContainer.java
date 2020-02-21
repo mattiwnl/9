@@ -32,7 +32,7 @@ public class RobotContainer {
 
 		// Initialize Drive Code
 		driveSub.setDefaultCommand(
-			new DefaultDriveCommand(
+			new DriveCommand(
 				driveSub, 
 				() -> xbox.getY(Hand.kLeft),
 				() -> xbox.getX(Hand.kRight)

@@ -83,14 +83,15 @@ public class Robot extends TimedRobot {
         // Turret Adjustment
         final double headingError = -Robot.x;
         System.out.println(headingError);
-        if (Robot.x > 1){
-            steeringAdjust = Kp*headingError - min_command;
-        }else if(Robot.x < 1){
-            steeringAdjust = Kp*headingError + min_command;
+        if (Robot.x > 1 && currentPosDrive <= posLimTurret){
+             steeringAdjust = KpheadingError - min_command;
+        }else if(Robot.x < 1 && currentPosDrive >= negLimTurret){
+             steeringAdjust = KpheadingError + min_command;
         }else{
             steeringAdjust = 0;
         }
     }
+    
 
     @Override
     public void autonomousInit() {
